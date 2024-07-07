@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class RoleResource extends Resource
@@ -51,6 +52,12 @@ class RoleResource extends Resource
         return [
             //
         ];
+    }
+
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->can('manage roles');
     }
 
     public static function getPages(): array

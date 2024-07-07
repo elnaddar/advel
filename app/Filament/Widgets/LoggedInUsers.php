@@ -7,6 +7,7 @@ use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class LoggedInUsers extends BaseWidget
 {
@@ -17,5 +18,10 @@ class LoggedInUsers extends BaseWidget
         return [
             Stat::make('Users Logged In Today', $loggedInUsersCount),
         ];
+    }
+
+    public static function canView(): bool
+    {
+        return Auth::user()->can('view user states');
     }
 }

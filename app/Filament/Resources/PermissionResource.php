@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PermissionResource extends Resource
 {
@@ -53,6 +54,12 @@ class PermissionResource extends Resource
         return [
             //
         ];
+    }
+
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->can('manage permissions');
     }
 
     public static function getPages(): array

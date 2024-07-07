@@ -16,12 +16,13 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\CheckboxList;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
 
     public static function form(Form $form): Form
     {
@@ -65,6 +66,12 @@ class UserResource extends Resource
             // Add any relations if necessary
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->can('manage users');
+    }
+
 
     public static function getPages(): array
     {
