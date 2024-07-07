@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $adminRole = Role::create(['name' => 'admin']);
 
         // Create permissions
-        $permissions = ['manage users', 'manage roles', 'manage permissions'];
+        $permissions = ['manage users', 'manage roles', 'manage permissions', 'view user states'];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
